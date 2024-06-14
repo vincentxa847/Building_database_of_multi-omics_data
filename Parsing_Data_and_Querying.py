@@ -55,24 +55,11 @@ class SubjectTable:
         self.data = data
 
     def turnToNull(self,cursor):
-        for insert in self.data[1:]: # without header
-            turnToNull = eval(str(insert).replace('NA', 'NULL').replace('unknown', 'NULL').replace('Unknown', 'NULL'))
-            sql = f"INSERT INTO Subject VALUES ('{turnToNull[0]}','{turnToNull[1]}','{turnToNull[2]}','{(turnToNull[3])}','{(turnToNull[4])}','{(turnToNull[5])}','{(turnToNull[6])}')"
-            sql = sql.replace("'NULL'", "NULL")
-            try:
-                sql = f"INSERT INTO Subject VALUES ('{turnToNull[0]}','{turnToNull[1]}','{turnToNull[2]}',{eval(turnToNull[3])},{eval(turnToNull[4])},{eval(turnToNull[5])},'{(turnToNull[6])}')"
-                cursor.execute(sql)
-            except NameError:
-                try:
-                    sql = f"INSERT INTO Subject VALUES ('{turnToNull[0]}','{turnToNull[1]}','{turnToNull[2]}',{turnToNull[3]},{eval(turnToNull[4])},{eval(turnToNull[5])},'{(turnToNull[6])}')"
-                    cursor.execute(sql)
-                except NameError:
-                    try:
-                        sql = f"INSERT INTO Subject VALUES ('{turnToNull[0]}','{turnToNull[1]}','{turnToNull[2]}',{turnToNull[3]},{(turnToNull[4])},{eval(turnToNull[5])},'{(turnToNull[6])}')"
-                        cursor.execute(sql)
-                    except NameError:
-                        sql = f"INSERT INTO Subject VALUES ('{turnToNull[0]}','{turnToNull[1]}','{turnToNull[2]}',{turnToNull[3]},{(turnToNull[4])},{(turnToNull[5])},'{(turnToNull[6])}')"
-                        cursor.execute(sql)
+        for insert in self.data[1:]:
+            turnToNull = ['NULL' if v in ['NA', 'unknown', 'Unknown'] else v for v in insert] # without header
+            turnToNull = str(turnToNull).replace("[","").replace("]","") # remove the part of list []
+            sql = f"INSERT INTO Subject VALUES ({turnToNull})"
+            cursor.execute(sql)
 
 class SampleAndMeasurementAndBiomoleculeTable:
     def __init__(self,metabolome,proteome,transcriptome):
@@ -323,11 +310,11 @@ if args.loaddb:
     try:
         Database = SQLOperation("2802815.db")
         # Import data
-        Subject = Data('Subject.csv')
-        Metabolome = Data('HMP_metabolome_abundance.tsv')
-        Proteome = Data('HMP_proteome_abundance.tsv')
-        Transcriptome = Data('HMP_transcriptome_abundance.tsv')
-        Annotation = Data('HMP_metabolome_annotation.csv')
+        Subject = Data('./Data/Subject.csv')
+        Metabolome = Data('./Data/HMP_metabolome_abundance.tsv')
+        Proteome = Data('./Data/HMP_proteome_abundance.tsv')
+        Transcriptome = Data('./Data/HMP_transcriptome_abundance.tsv')
+        Annotation = Data('./Data/HMP_metabolome_annotation.csv')
 
         SubjectContent = Subject.openCsv()
         MetabolomeContent = Metabolome.openTsv()
