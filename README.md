@@ -4,7 +4,7 @@
 - Object-Oriented Programming
 - Programmatic Database Access
 
-Data come from the paper [Personal aging markers and ageotypes revealed by deep longitudinal profiling](https://www.nature.com/articles/s41591-019-0719-5), which consists of a mixture of pre-processed files produced from the measurements of the transcripts, proteins, and metabolites of a cohort of 106 individuals in the study
+Data come from the paper [Personal aging markers and ageotypes revealed by deep longitudinal profiling](https://www.nature.com/articles/s41591-019-0719-5), which consists of a mixture of pre-processed files produced from the measurements of the transcripts, proteins, and metabolites of a cohort of 106 individuals in the study.
 
 The database was designed to have four entities, with a one to one  relationship and two one to many relationships. 
 ![image](https://github.com/vincentxa847/Constructing_multi-omics_database/assets/118545004/a6a948f4-fcd3-4fc5-a115-0d3d1c0bf3bc)
@@ -15,7 +15,7 @@ Subject ID is stored in Sample table as a foreign key and Sample ID is utilized 
 Relationship between Subject and Sample is one to many. For example, Subject ZQMVU4Q has three Sample, which are ZQMVU4Q-01, ZQMVU4Q-03 and  ZQMVU4Q-04. Samples stored in Sample table can be referred to Subject table using 
 Subject ID in Sample table. 
 
-For **Biomolecule entity**, table called Biomolecule was created to store the biomolecule  from 
+For **Biomolecule entity**, table called Biomolecule was created to store the biomolecule from 
 *HMP_transcriptome_abundance.tsv, HMP_proteome_abundance.tsv and HMP_metabolome_abundance.tsv*. 
 Because some BiomoleculeIDs of proteomics and  transcriptomics share same name. Biomolecule ID and Omics type are set as primary 
 key to better distinguish biomolecules from three data files and avoid UNIQUE  Constraint failed.
@@ -34,8 +34,8 @@ A join table called  Identification is created to represent the many to many rel
 relationship attribute in Identification. BiomoleculeID (peak) and Metabolite are set as  primary key.
 
 ## Running
-The running section of program is divided into three parts, which are createdb,loaddb and querydb
-First, user create database using option **createdb**, which will use *Create.sql* to build the frame of database.
+The running section of program is divided into three parts, which are createdb,loaddb and querydb.
+First, user create database using option **createdb**, which will use script *Create.sql* to build the frame of database.
 ```
 python Parsing_Data_and_Querying.py --createdb
 ```
@@ -64,7 +64,7 @@ a.	'nHILIC_121.0505_3.5'
 b.	'nHILIC_130.0872_6.3'
 c.	'nHILIC_133.0506_2.3'
 d.	'nHILIC_133.0506_4.4'
-This query will be easy if the annotation information has been correctly parsed and stored into the database.
+
 6.	Retrieve the minimum, maximum and average age of Subjects.
 
 7.	Retrieve the list of pathways from the annotation data, and the count of how many times each pathway has been annotated. Display only pathways that have a count of at least 10. Order the results by the number of annotations in descending order.
