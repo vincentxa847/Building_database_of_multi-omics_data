@@ -1,6 +1,7 @@
 # Using multi-omics data to build a database for querying
 
-## This program reads a set of omic data and stores it in a designed SQLite database. Specified queries are performed to validate the database design. This program demonstrates the following programming fundamentals:
+## This program reads a set of omic data and stores it in a designed SQLite database. Specified queries are performed to validate the database design. 
+### This program demonstrates the following programming fundamentals:
 - Object-Oriented Programming
 - Programmatic Database Access
 
